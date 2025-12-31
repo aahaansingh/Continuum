@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: dark;
+  color: #c0caf5;
+  background-color: #1a1b26;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  color: #7aa2f7;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #24283b;
+  color: #7aa2f7;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+button:hover {
+  border-color: #7aa2f7;
+  background-color: #292e42;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+input,
+select {
+  background-color: #24283b;
+  border: 1px solid #414868;
+  color: #c0caf5;
+  padding: 0.5em;
+  border-radius: 4px;
+  margin: 0.5em 0;
+  width: 100%;
+}
+
+.card {
+  background-color: #1f2335;
+  padding: 2em;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.prog-bar {
+  height: 4px;
+  background: #24283b;
+  width: 100%;
+  margin: 1em 0;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.prog-fill {
+  height: 100%;
+  background: #7aa2f7;
+  transition: width 0.3s;
+}
