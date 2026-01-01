@@ -27,7 +27,7 @@ function App() {
         const data = await res.json()
         window.open(data.url, '_blank')
 
-        const pasted = prompt("Please paste the redirected URL here (starts with http://127.0.0.1:300...):")
+        const pasted = prompt("Please paste the full redirected URL here:")
         if (pasted) {
           const tokenRes = await fetch('/api/auth/token', {
             method: 'POST', body: JSON.stringify({ url: pasted }), headers: { 'Content-Type': 'application/json' }

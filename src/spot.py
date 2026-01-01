@@ -22,7 +22,7 @@ def get_spotify_client():
     
     client_id = os.environ.get("SPOTIPY_CLIENT_ID")
     client_secret = os.environ.get("SPOTIPY_CLIENT_SECRET")
-    redirect_uri = os.environ.get("SPOTIPY_REDIRECT_URI", "http://127.0.0.1:300")
+    redirect_uri = os.environ.get("SPOTIPY_REDIRECT_URI")
 
     if not client_id or not client_secret:
         print("\nCredentials not found in environment variables.")

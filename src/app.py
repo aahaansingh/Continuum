@@ -11,6 +11,7 @@ from solver import solver
 
 # Ensure we can import from src
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+from flask_cors import CORS
 
 app = Flask(__name__, static_folder='../client/dist', static_url_path='/')
 CORS(app)
@@ -20,7 +21,7 @@ CORS(app)
 def get_spotify_auth_manager(mode='user'):
     client_id = os.environ.get("SPOTIPY_CLIENT_ID")
     client_secret = os.environ.get("SPOTIPY_CLIENT_SECRET")
-    redirect_uri = os.environ.get("SPOTIPY_REDIRECT_URI", "http://127.0.0.1:300")
+    redirect_uri = os.environ.get("SPOTIPY_REDIRECT_URI")
     
     if mode == 'client':
         return SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
@@ -246,4 +247,5 @@ def save_playlist():
         return jsonify({'error': str(e)}), 400
 
 if __name__ == '__main__':
-    app.run(port=3000, debug=True)
+    port = int(os.environ.get("PORT", 3000))
+    app.run(host="0.0.0.0", port=port)
