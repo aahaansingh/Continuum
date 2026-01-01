@@ -1,16 +1,17 @@
+import sys
+import os
+
+# Ensure we can import from src folder (where solver.py resides)
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
-import os
-import sys
 import random
 import time
 import requests
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth, SpotifyClientCredentials
 from solver import solver
-
-# Ensure we can import from src
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from flask_cors import CORS
 
 app = Flask(__name__, static_folder='../client/dist', static_url_path='/')
