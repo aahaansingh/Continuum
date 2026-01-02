@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 
 function App() {
+  const API_BASE = import.meta.env.VITE_API_URL || ''
   const [step, setStep] = useState('auth') // auth, source, processing, results
   const [authMode, setAuthMode] = useState('client') // client, user
   const [sourceMode, setSourceMode] = useState('playlist') // playlist, recs
@@ -23,13 +24,13 @@ function App() {
     } else {
       // User auth flow
       try {
-        const res = await fetch('/api/auth/url')
+        const res = await fetch(`${API_BASE}/api/auth/url`)
         const data = await res.json()
         window.open(data.url, '_blank')
 
         const pasted = prompt("Please paste the full redirected URL here:")
         if (pasted) {
-          const tokenRes = await fetch('/api/auth/token', {
+          const tokenRes = await fetch(`${API_BASE}/api/auth/token`, {
             method: 'POST', body: JSON.stringify({ url: pasted }), headers: { 'Content-Type': 'application/json' }
           })
           const tokenData = await tokenRes.json()
@@ -56,7 +57,7 @@ function App() {
         ? { id: inputValue, mode: authMode }
         : { seed: inputValue, mode: authMode }
 
-      const res = await fetch(endpoint, {
+      const res = await fetch(`${API_BASE}${endpoint}`, {
         method: 'POST', body: JSON.stringify(payload), headers: { 'Content-Type': 'application/json' }
       })
       const data = await res.json()
@@ -72,7 +73,7 @@ function App() {
         setProgress(((i) / rawTracks.length) * 100)
         setStatus(`Processing [${i + 1}/${rawTracks.length}]: ${t.name}`)
 
-        const featRes = await fetch('/api/features', {
+        const featRes = await fetch(`${API_BASE}/api/features`, {
           method: 'POST', body: JSON.stringify({ track: t }), headers: { 'Content-Type': 'application/json' }
         })
         const featData = await featRes.json()
@@ -85,7 +86,7 @@ function App() {
       setStatus('Running Solver...')
       setProgress(100)
 
-      const solveRes = await fetch('/api/solve', {
+      const solveRes = await fetch(`${API_BASE}/api/solve`, {
         method: 'POST',
         body: JSON.stringify({ songs: processed, length: mixLength }),
         headers: { 'Content-Type': 'application/json' }
@@ -109,7 +110,7 @@ function App() {
   const handleSave = async () => {
     try {
       const uris = resultMix.map(t => t.uri)
-      const res = await fetch('/api/save', {
+      const res = await fetch(`${API_BASE}/api/save`, {
         method: 'POST', body: JSON.stringify({ uris }), headers: { 'Content-Type': 'application/json' }
       })
       const data = await res.json()
