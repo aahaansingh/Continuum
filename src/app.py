@@ -12,10 +12,11 @@ import requests
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth, SpotifyClientCredentials
 from solver import solver
-from flask_cors import CORS
+
 
 app = Flask(__name__, static_folder='../client/dist', static_url_path='/')
-CORS(app)
+frontend_url = os.environ.get("FRONTEND_URL", "*")
+CORS(app, origins=[frontend_url])
 
 # --- Helpers ---
 
